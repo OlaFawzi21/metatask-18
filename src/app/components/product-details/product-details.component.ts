@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { Product } from '../../interfaces/products';
 import { ProductsService } from '../../services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -14,7 +15,8 @@ import { Meta, Title } from '@angular/platform-browser';
 export class ProductDetailsComponent {
   product!: Product;
   id: number = 0;
-
+  private readonly _PLATFORM_ID = inject( PLATFORM_ID );
+  
   constructor(
     private productsService: ProductsService,
     activatedRoute: ActivatedRoute,
@@ -40,7 +42,9 @@ export class ProductDetailsComponent {
           { property: 'og:title', content: this.product.title },
           { property: 'og:description', content: this.product.description },
           { property: 'og:image', content: this.product.images[0] },
-          { property: 'og:url', content: window.location.href },
+          ...(isPlatformBrowser(this._PLATFORM_ID)
+            ? [{ property: 'og:url', content: window.location.href }]
+            : []),
           { property: 'og:type', content: 'website' },
         ]);
       },
