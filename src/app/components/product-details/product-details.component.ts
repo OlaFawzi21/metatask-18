@@ -41,7 +41,7 @@ export class ProductDetailsComponent {
         this.meta.addTags([
           { property: 'og:title', content: this.product.title },
           { property: 'og:description', content: this.product.description },
-          { property: 'og:image', content: this.product.images[0] },
+          { property: 'og:image', content: 'assets/img.jpg' },
           ...(isPlatformBrowser(this._PLATFORM_ID)
             ? [{ property: 'og:url', content: window.location.href }]
             : []),
