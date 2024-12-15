@@ -22,7 +22,7 @@ export class ProductsComponent {
   getProducts() {
     this.productsService.getProducts().subscribe({
       next: (res) => {
-        this.products = res.products;
+        this.products = res;
       },
     });
   }

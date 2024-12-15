@@ -4,12 +4,5 @@ export interface Product {
   description: string;
   category: string;
   price: number;
-  images: string;
-}
-
-export interface Products {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
+  image: string;
 }
